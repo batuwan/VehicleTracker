@@ -11,8 +11,11 @@ namespace VehicleTracker.Data.Configuration
     public class VehicleMoveConfiguration : IEntityTypeConfiguration<VehicleMove>
     {
         public void Configure(EntityTypeBuilder<VehicleMove> builder)
-        {
-            throw new NotImplementedException();
+        {   
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).UseIdentityColumn();
+
+            //TODO
         }
     }
 }
