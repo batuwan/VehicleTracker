@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using VehicleTracker.Core.Model;
 
-namespace VehicleTracker.Core.IRepository
+namespace VehicleTracker.Core.Service
 {
-    interface IZoneRecordRepository : IRepository<ZoneRecord>
+    interface IVehicleService : IService<Vehicle>
     {
-        //TODO:
+        //TODO: 
     }
 }

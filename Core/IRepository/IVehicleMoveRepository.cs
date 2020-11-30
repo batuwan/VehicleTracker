@@ -8,6 +8,6 @@ namespace VehicleTracker.Core.IRepository
 {
     interface IVehicleMoveRepository : IRepository<VehicleMove>
     {
-
+        //TODO:
     }
 }

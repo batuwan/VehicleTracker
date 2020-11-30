@@ -8,6 +8,6 @@ namespace VehicleTracker.Core.IRepository
 {
     interface IZoneRepository : IRepository<Zone>
     {
-
+        //TODO: 
     }
 }

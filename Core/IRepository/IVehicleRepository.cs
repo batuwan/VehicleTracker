@@ -10,6 +10,6 @@ namespace VehicleTracker.Core.IRepository
 
     {
         Task<IEnumerable<Vehicle>> GetAllWithRecordsAsync();
-
+        //TODO:
     }
 }
