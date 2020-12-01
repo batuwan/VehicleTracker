@@ -6,7 +6,7 @@ using VehicleTracker.Core.IRepository;
 
 namespace VehicleTracker.Core.UnitOfWork
 {
-    interface IUnitOfWork
+    public interface IUnitOfWork
     {
         IVehicleRepository Vehicles { get; }
         IZoneRepository Zones { get; }
