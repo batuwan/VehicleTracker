@@ -31,7 +31,9 @@ namespace VehicleTracker
         {
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer(Configuration["ConnectionStrings:SqlConStr"].ToString());
+                options.UseSqlServer(Configuration["ConnectionStrings:SqlConStr"].ToString(), o => {
+                    o.MigrationsAssembly("VehicleTracker.Data");
+                });
             });
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
