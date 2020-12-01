@@ -6,7 +6,7 @@ using VehicleTracker.Core.Model;
 
 namespace VehicleTracker.Core.IRepository
 {
-    interface IZoneRecordRepository : IRepository<ZoneRecord>
+    public interface IZoneRecordRepository : IRepository<ZoneRecord>
     {
         //TODO:
     }

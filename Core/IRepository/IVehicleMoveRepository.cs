@@ -6,7 +6,7 @@ using VehicleTracker.Core.Model;
 
 namespace VehicleTracker.Core.IRepository
 {
-    interface IVehicleMoveRepository : IRepository<VehicleMove>
+    public interface IVehicleMoveRepository : IRepository<VehicleMove>
     {
         //TODO:
     }

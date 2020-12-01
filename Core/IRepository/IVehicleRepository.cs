@@ -6,7 +6,7 @@ using VehicleTracker.Core.Model;
 
 namespace VehicleTracker.Core.IRepository
 {
-    interface IVehicleRepository : IRepository<Vehicle>
+    public interface IVehicleRepository : IRepository<Vehicle>
 
     {
         Task<IEnumerable<Vehicle>> GetAllWithRecordsAsync();
