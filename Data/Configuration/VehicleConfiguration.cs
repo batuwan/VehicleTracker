@@ -16,6 +16,9 @@ namespace VehicleTracker.Data.Configuration
             builder.Property(x => x.Id).UseIdentityColumn();
 
             builder.Property(x => x.Plate).IsRequired();
+
+            builder.ToTable("Vehicles");
+
         }
     }
 }

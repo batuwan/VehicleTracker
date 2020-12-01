@@ -18,6 +18,8 @@ namespace VehicleTracker.Data.Configuration
             builder.Property(x => x.Name);
             builder.Property(x => x.Geom).IsRequired();
 
+            builder.ToTable("Zones");
+
         }
     }
 }

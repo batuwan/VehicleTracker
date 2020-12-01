@@ -18,8 +18,11 @@ namespace VehicleTracker.Data.Configuration
             //TODO
             builder.Property(x => x.Geom).IsRequired();
             builder.Property(x => x.VehicleId).IsRequired();
-            builder.Property(x => x.Date_).IsRequired();
-            
+            builder.Property(x => x.Date_).IsRequired(); 
+            builder.Property(x => x.Velocity);
+
+            builder.ToTable("VehicleMoves");
+
         }
     }
 }

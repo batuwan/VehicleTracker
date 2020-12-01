@@ -12,7 +12,17 @@ namespace VehicleTracker.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<ZoneRecord> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).UseIdentityColumn();
+
+            builder.Property(x => x.Date_);
+            builder.Property(x => x.VehicleId).IsRequired();
+            builder.Property(x => x.VehicleMoveId).IsRequired();
+            builder.Property(x => x.ZoneId).IsRequired();
+            builder.Property(x => x.RecordType);
+
+            builder.ToTable("ZoneRecords");
+
         }
     }
 }

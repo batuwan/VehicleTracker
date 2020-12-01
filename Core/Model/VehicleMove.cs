@@ -12,9 +12,11 @@ namespace VehicleTracker.Core.Model
 
         public DateTime Date_ { get; set; }
 
+        public int Velocity { get; set; }
         public int VehicleId { get; set; }
 
         public virtual Vehicle Vehicle { get; set; }
+
 
     }
 }
