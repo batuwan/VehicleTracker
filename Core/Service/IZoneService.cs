@@ -8,6 +8,6 @@ namespace VehicleTracker.Core.Service
 {
     interface IZoneService : IService<Zone>
     {
-        //TODO:
+        //TODO: Interface ZoneService metotları?
     }
 }

@@ -59,7 +59,7 @@ namespace VehicleTracker.Service
         {
             _repository.RemoveRange(entities);
             _unitOfWork.Commit();
-                }
+        }
 
         public async Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
         {
@@ -71,6 +71,13 @@ namespace VehicleTracker.Service
             return await _repository.Where(predicate);
         }
 
-        //TODO: Update method!
+        public TEntity Update(TEntity entity)
+        {
+            TEntity updateEntity = _repository.Update(entity);
+
+            _unitOfWork.Commit();
+
+            return updateEntity;
+        }
     }
 }
