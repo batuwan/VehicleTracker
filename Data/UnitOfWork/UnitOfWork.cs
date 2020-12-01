@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VehicleTracker.Core.IRepository;
 using VehicleTracker.Core.UnitOfWork;
+using VehicleTracker.Data.Repository;
 
 namespace VehicleTracker.Data.UnitOfWork
 {
@@ -11,14 +12,33 @@ namespace VehicleTracker.Data.UnitOfWork
     {
         private readonly AppDbContext _context;
 
+        private VehicleMoveRepository _vehicleMoveRepository;
+        private VehicleRepository _vehicleRepository;
+        private ZoneRepository _zoneRepository;
+        private ZoneRecordRepository _zoneRecordRepository;
         //TODO: 
 
-        public IVehicleRepository Vehicles => throw new NotImplementedException();
+        IVehicleRepository IUnitOfWork.Vehicles => _vehicleRepository = _vehicleRepository ?? new VehicleRepository(_context);
 
-        public IZoneRepository Zones => throw new NotImplementedException();
+        IZoneRepository IUnitOfWork.Zones => _zoneRepository = _zoneRepository ?? new ZoneRepository(_context);
 
-        public IVehicleMoveRepository VehicleMoves => throw new NotImplementedException();
+        IVehicleMoveRepository IUnitOfWork.VehicleMoves => _vehicleMoveRepository = _vehicleMoveRepository ?? new VehicleMoveRepository(_context);
 
-        public IZoneRecordRepository ZoneRecords => throw new NotImplementedException();
+        IZoneRecordRepository IUnitOfWork.ZoneRecords => _zoneRecordRepository = _zoneRecordRepository ?? new ZoneRecordRepository(_context);
+
+        public UnitOfWork(AppDbContext appDbContext)
+        {
+            _context = appDbContext;
+        }
+
+        public void Commit()
+        {
+            _context.SaveChanges();
+        }
+
+        public async Task CommitAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }

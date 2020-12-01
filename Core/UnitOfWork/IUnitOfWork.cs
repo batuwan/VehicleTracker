@@ -13,5 +13,8 @@ namespace VehicleTracker.Core.UnitOfWork
         IVehicleMoveRepository VehicleMoves { get; }
         IZoneRecordRepository ZoneRecords { get; }
 
+        Task CommitAsync();
+
+        void Commit();
     }
 }

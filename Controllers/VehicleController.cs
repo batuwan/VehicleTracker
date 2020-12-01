@@ -11,5 +11,6 @@ namespace VehicleTracker.Controllers
     [ApiController]
     public class VehicleController : ControllerBase
     {
+
     }
 }
