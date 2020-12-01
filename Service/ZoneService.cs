@@ -3,51 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using VehicleTracker.Core.IRepository;
 using VehicleTracker.Core.Model;
 using VehicleTracker.Core.Service;
+using VehicleTracker.Core.UnitOfWork;
 
 namespace VehicleTracker.Service
 {
-    public class ZoneService : IZoneService
+    public class ZoneService : Service<Zone>, IZoneService
     {
-        public Task<Zone> AddAsync(Zone entity)
+        public ZoneService(IUnitOfWork unitOfWork, IRepository<Zone> repository) : base(unitOfWork, repository)
         {
-            throw new NotImplementedException();
+
         }
 
-        public Task<IEnumerable<Zone>> AddRangeAsync(IEnumerable<Zone> entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Zone>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ValueTask<Zone> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(Zone entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveRange(IEnumerable<Zone> entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Zone> SingleOrDefaultAsync(Expression<Func<Zone, bool>> predicate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Zone>> Where(Expression<Func<Zone, bool>> predicate)
-        {
-            throw new NotImplementedException();
-        }
+        //TODO: Bölgeye özel metotlar?
     }
 }
