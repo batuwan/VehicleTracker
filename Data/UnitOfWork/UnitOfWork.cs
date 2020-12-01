@@ -20,11 +20,11 @@ namespace VehicleTracker.Data.UnitOfWork
 
         IVehicleRepository IUnitOfWork.Vehicles => _vehicleRepository = _vehicleRepository ?? new VehicleRepository(_context);
 
-        IZoneRepository IUnitOfWork.Zones => _zoneRepository = _zoneRepository ?? new ZoneRepository(_context);
+        IZoneRepository IUnitOfWork.Zones => _zoneRepository ??= new ZoneRepository(_context);
 
-        IVehicleMoveRepository IUnitOfWork.VehicleMoves => _vehicleMoveRepository = _vehicleMoveRepository ?? new VehicleMoveRepository(_context);
+        IVehicleMoveRepository IUnitOfWork.VehicleMoves => _vehicleMoveRepository ??= new VehicleMoveRepository(_context);
 
-        IZoneRecordRepository IUnitOfWork.ZoneRecords => _zoneRecordRepository = _zoneRecordRepository ?? new ZoneRecordRepository(_context);
+        IZoneRecordRepository IUnitOfWork.ZoneRecords => _zoneRecordRepository ??= new ZoneRecordRepository(_context);
 
         public UnitOfWork(AppDbContext appDbContext)
         {
