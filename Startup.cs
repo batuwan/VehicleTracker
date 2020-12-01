@@ -11,9 +11,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VehicleTracker.Core.IRepository;
+using VehicleTracker.Core.Service;
 using VehicleTracker.Core.UnitOfWork;
 using VehicleTracker.Data;
+using VehicleTracker.Data.Repository;
 using VehicleTracker.Data.UnitOfWork;
+using VehicleTracker.Service;
 
 namespace VehicleTracker
 {
@@ -29,9 +33,21 @@ namespace VehicleTracker
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IService<>), typeof(Service<>));
+            services.AddScoped<IZoneService, ZoneService>();
+            services.AddScoped<IVehicleService, VehicleService>();
+            services.AddScoped<IVehicleMoveService, VehicleMoveService>();
+            services.AddScoped<IZoneRecordService, ZoneRecordService>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer(Configuration["ConnectionStrings:SqlConStr"].ToString(), o => {
+                options.UseSqlServer(Configuration["ConnectionStrings:SqlConStr"].ToString(), o =>
+                {
                     o.MigrationsAssembly("VehicleTracker.Data");
                 });
             });
