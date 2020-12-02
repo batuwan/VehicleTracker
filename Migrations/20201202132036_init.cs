@@ -4,7 +4,7 @@ using NetTopologySuite.Geometries;
 
 namespace VehicleTracker.Migrations
 {
-    public partial class ilkMigrasyon : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,8 +53,7 @@ namespace VehicleTracker.Migrations
                         name: "FK_VehicleMoves_Vehicles_VehicleId",
                         column: x => x.VehicleId,
                         principalTable: "Vehicles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -77,19 +76,18 @@ namespace VehicleTracker.Migrations
                         column: x => x.VehicleMoveId,
                         principalTable: "VehicleMoves",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_ZoneRecords_Vehicles_VehicleId",
                         column: x => x.VehicleId,
                         principalTable: "Vehicles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_ZoneRecords_Zones_ZoneId",
                         column: x => x.ZoneId,
                         principalTable: "Zones",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(

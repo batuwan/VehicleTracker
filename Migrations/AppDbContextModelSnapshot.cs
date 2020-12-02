@@ -95,7 +95,8 @@ namespace VehicleTracker.Migrations
                     b.Property<bool>("RecordType")
                         .HasColumnType("bit");
 
-                    b.Property<int>("VehicleId")
+                    b.Property<int?>("VehicleId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int>("VehicleMoveId")
@@ -120,7 +121,7 @@ namespace VehicleTracker.Migrations
                     b.HasOne("VehicleTracker.Core.Model.Vehicle", "Vehicle")
                         .WithMany("VehicleMoves")
                         .HasForeignKey("VehicleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Vehicle");
@@ -131,7 +132,7 @@ namespace VehicleTracker.Migrations
                     b.HasOne("VehicleTracker.Core.Model.Vehicle", "Vehicle")
                         .WithMany("ZoneRecords")
                         .HasForeignKey("VehicleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("VehicleTracker.Core.Model.VehicleMove", "VehicleMove")
