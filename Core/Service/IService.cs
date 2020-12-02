@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VehicleTracker.Core.Service
 {
-    interface IService<TEntity> where TEntity : class
+    public interface IService<TEntity> where TEntity : class
     {
         ValueTask<TEntity> GetByIdAsync(int id);
         Task<IEnumerable<TEntity>> GetAllAsync();

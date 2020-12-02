@@ -20,7 +20,7 @@ namespace VehicleTracker.Data
         public DbSet<ZoneRecord> ZoneRecords { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        {   //TODO: 
             modelBuilder.ApplyConfiguration(new VehicleConfiguration());
             modelBuilder.ApplyConfiguration(new VehicleMoveConfiguration());
             modelBuilder.ApplyConfiguration(new ZoneConfiguration());

@@ -33,7 +33,7 @@ namespace VehicleTracker
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+                
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IService<>), typeof(Service<>));
             services.AddScoped<IZoneService, ZoneService>();
@@ -46,10 +46,10 @@ namespace VehicleTracker
 
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer(Configuration["ConnectionStrings:SqlConStr"].ToString(), o =>
+                options.UseSqlServer(Configuration.GetConnectionString("Default"), /*o =>
                 {
-                    o.MigrationsAssembly("VehicleTracker.Data");
-                });
+                    o.MigrationsAssembly("VehicleTracker.Data"); //FIX IT IF NECESSARY
+                }, */ p => p.UseNetTopologySuite());
             });
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
