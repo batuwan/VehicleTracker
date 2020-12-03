@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VehicleTracker.Core.Model;
 using VehicleTracker.Core.Service;
+using VehicleTracker.Core.UnitOfWork;
 using VehicleTracker.DTOs;
 
 namespace VehicleTracker.Controllers
@@ -17,11 +18,12 @@ namespace VehicleTracker.Controllers
     {
         private readonly IVehicleService _vehicleService;
         private readonly IMapper _mapper;
-
-        public VehicleController(IVehicleService vehicleService, IMapper mapper)
+        private readonly IUnitOfWork _unitOfWork;
+        public VehicleController(IVehicleService vehicleService, IMapper mapper, IUnitOfWork unitOfWork)
         {
             _vehicleService = vehicleService;
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
         [HttpGet]
@@ -45,6 +47,26 @@ namespace VehicleTracker.Controllers
             var newVehicle = await _vehicleService.AddAsync(_mapper.Map<Vehicle>(vehicleDTO));
 
             return Created(string.Empty, _mapper.Map<VehicleDTO>(newVehicle));
+        }
+
+        [HttpPut]
+        public IActionResult Update(VehicleDTO vehicleDTO)
+
+        {
+            var vehicle = _vehicleService.Update(_mapper.Map<Vehicle>(vehicleDTO));
+
+            return NoContent();
+        }
+
+        //?????
+        [HttpDelete("{id}")]
+        public IActionResult Remove(int id)
+        {
+            var vehicle = _vehicleService.GetByIdAsync(id).Result;
+            _vehicleService.Remove(vehicle);
+            _unitOfWork.Commit();
+
+            return NoContent();
         }
     }
 }
