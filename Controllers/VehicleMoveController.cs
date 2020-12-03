@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NetTopologySuite.Geometries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,10 +45,13 @@ namespace VehicleTracker.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Save(VehicleMoveDTO vehicleMoveDTO)
-        {
-            var newVehicleMove = await _vehicleMoveService.AddAsync(_mapper.Map<VehicleMove>(vehicleMoveDTO));
+        { var point = _mapper.Map<MyPoint>(vehicleMoveDTO);
+            var _vehicleMove = _mapper.Map<VehicleMove>(vehicleMoveDTO);
+            _vehicleMove.Geom = point;
+            /* _vehicleMove.Geom = new Point(vehicleMoveDTO._x, vehicleMoveDTO._y) { SRID = vehicleMoveDTO.SRID};*/
+            var newVehicleMove = await _vehicleMoveService.AddAsync(_vehicleMove);
 
-            return Created(string.Empty, _mapper.Map<VehicleMoveDTO>(newVehicleMove));
+            return Created(string.Empty, _vehicleMove);
         }
 
         [HttpPut]

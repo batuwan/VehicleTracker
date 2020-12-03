@@ -9,7 +9,14 @@ namespace VehicleTracker.Core.Model
     public class VehicleMove
     {
         public int Id { get; set; }
-        public Geometry Geom { get; set; }
+        public NetTopologySuite.Geometries.Point Geom { get; set; }
+
+        /*
+        public double _x { get; set; }
+        public double _y { get; set; }
+        public int SRID { get; set; }
+        */
+
 
         public DateTime Date_ { get; set; }
 
