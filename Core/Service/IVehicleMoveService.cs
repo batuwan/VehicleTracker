@@ -6,7 +6,7 @@ using VehicleTracker.Core.Model;
 
 namespace VehicleTracker.Core.Service
 {
-    interface IVehicleMoveService : IService<VehicleMove>
+    public interface IVehicleMoveService : IService<VehicleMove>
     {
         //TODO: 
     }
