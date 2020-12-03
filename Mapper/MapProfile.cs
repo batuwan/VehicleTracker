@@ -24,6 +24,10 @@ namespace VehicleTracker.Mapper
 
             CreateMap<ZoneRecord, ZoneRecordDTO>();
             CreateMap<ZoneRecordDTO, ZoneRecord>();
+            
+            CreateMap<Vehicle, VehicleWithRecordsDTO>();
+            CreateMap<Vehicle, VehicleWithMovementsDTO>();
+
 
 
 

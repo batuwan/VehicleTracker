@@ -8,6 +8,9 @@ namespace VehicleTracker.Core.Service
 {
     public interface IVehicleService : IService<Vehicle>
     {
-        //TODO: 
+        Task<Vehicle> GetWithRecordsByIdAsync(int vehicleId);
+        Task<Vehicle> GetWithMovementsByIdAsync(int vehicleId);
+
+
     }
 }

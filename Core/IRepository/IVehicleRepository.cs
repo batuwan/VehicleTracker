@@ -9,7 +9,8 @@ namespace VehicleTracker.Core.IRepository
     public interface IVehicleRepository : IRepository<Vehicle>
 
     {
-        Task<IEnumerable<Vehicle>> GetAllWithRecordsAsync();
-        //TODO:
+        Task<Vehicle> GetWithRecordsByIdAsync(int vehicleID);
+        Task<Vehicle> GetWithMovementsByIdAsync(int vehicleID);
+        
     }
 }

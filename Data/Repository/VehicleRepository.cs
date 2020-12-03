@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,9 +16,15 @@ namespace VehicleTracker.Data.Repository
         {
         }
 
-        public Task<IEnumerable<Vehicle>> GetAllWithRecordsAsync()
+        public async Task<Vehicle> GetWithRecordsByIdAsync(int vehicleID)
         {
-            return null; //TODO
+            return await _appDbContext.Vehicles.Include(x => x.ZoneRecords).SingleOrDefaultAsync(x => x.Id == vehicleID);
+
+        }
+
+        public async Task<Vehicle> GetWithMovementsByIdAsync(int vehicleID)
+        {
+            return await _appDbContext.Vehicles.Include(x => x.VehicleMoves).SingleOrDefaultAsync(x => x.Id == vehicleID);
         }
     }
 }

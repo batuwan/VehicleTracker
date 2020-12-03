@@ -41,6 +41,22 @@ namespace VehicleTracker.Controllers
             return Ok(_mapper.Map<VehicleDTO>(vehicle));
         }
 
+        [HttpGet("{id}/movements")]
+        public async Task<IActionResult> GetWithMovementsById(int id)
+        {
+            var vehicle = await _vehicleService.GetWithMovementsByIdAsync(id);
+
+            return Ok(_mapper.Map<VehicleWithMovementsDTO>(vehicle));
+        }
+
+        [HttpGet("{id}/records")]
+        public async Task<IActionResult> GetWithRecordsById(int id)
+        {
+            var vehicle = await _vehicleService.GetWithRecordsByIdAsync(id);
+
+            return Ok(_mapper.Map<VehicleWithRecordsDTO>(vehicle));
+        }
+
         [HttpPost]
         public async Task<IActionResult> Save(VehicleDTO vehicleDTO)
         {
@@ -58,7 +74,6 @@ namespace VehicleTracker.Controllers
             return NoContent();
         }
 
-        //?????
         [HttpDelete("{id}")]
         public IActionResult Remove(int id)
         {
