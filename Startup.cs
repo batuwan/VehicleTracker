@@ -47,6 +47,7 @@ namespace VehicleTracker
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            
 
             services.AddDbContext<AppDbContext>(options =>
             {
