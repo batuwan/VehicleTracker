@@ -8,7 +8,14 @@ namespace VehicleTracker.Service
 {
     public class Intersection
     {
-       
+       /*
+        
+        
+        
+        */
+
+
+
         // Do these two geometries intersects? True or false.
         public bool isIntersects(Geometry g1, Geometry g2)
         {

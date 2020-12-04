@@ -45,10 +45,10 @@ namespace VehicleTracker.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(int vehicleMoveId, int ZoneId)
         {
-            
+            //TODO: Buraya şartlara göre atama yapılmalı. 
             //var newZoneRecord = await _zoneRecordService.AddAsync(_mapper.Map<ZoneRecord>(zoneRecordDTO));
 
-            return Created(string.Empty, _mapper.Map<ZoneRecordDTO>(newZoneRecord));
+            return Created(string.Empty, null);
         }
 
         [HttpPut]
