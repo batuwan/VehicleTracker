@@ -7,11 +7,13 @@ using VehicleTracker.Core.IRepository;
 using VehicleTracker.Core.Model;
 using VehicleTracker.Core.Service;
 using VehicleTracker.Core.UnitOfWork;
+using VehicleTracker.DTOs;
 
 namespace VehicleTracker.Service
 {
     public class VehicleMoveService : Service<VehicleMove>, IVehicleMoveService
-    {
+    {   
+        
         public VehicleMoveService(IUnitOfWork unitOfWork, IRepository<VehicleMove> repository) : base(unitOfWork, repository)
         {
         }

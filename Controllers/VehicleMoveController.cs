@@ -10,6 +10,7 @@ using VehicleTracker.Core.Model;
 using VehicleTracker.Core.Service;
 using VehicleTracker.Core.UnitOfWork;
 using VehicleTracker.DTOs;
+using VehicleTracker.Mapper;
 
 namespace VehicleTracker.Controllers
 {
@@ -43,15 +44,20 @@ namespace VehicleTracker.Controllers
             return Ok(_mapper.Map<VehicleMoveDTO>(vehicle));
         }
 
+        /*
+         string json = "{\"coordinates\":[-2.124156,51.899523],\"type\":\"Point\"}";
+
+         Point point = JsonConvert.DeserializeObject<Point>(json);
+         */
         [HttpPost]
         public async Task<IActionResult> Save(VehicleMoveDTO vehicleMoveDTO)
-        { var point = _mapper.Map<MyPoint>(vehicleMoveDTO);
+        {
             var _vehicleMove = _mapper.Map<VehicleMove>(vehicleMoveDTO);
-            _vehicleMove.Geom = point;
-            /* _vehicleMove.Geom = new Point(vehicleMoveDTO._x, vehicleMoveDTO._y) { SRID = vehicleMoveDTO.SRID};*/
+            _vehicleMove.Geom = GeoJSONConvert.geoJSONToGeometry(vehicleMoveDTO.Geom_);
+            //_vehicleMove.Geom = GeoJSONConvert.FeatureToGeometry(vehicleMoveDTO.Geom_);
             var newVehicleMove = await _vehicleMoveService.AddAsync(_vehicleMove);
 
-            return Created(string.Empty, _vehicleMove);
+            return Created(string.Empty, newVehicleMove);
         }
 
         [HttpPut]
