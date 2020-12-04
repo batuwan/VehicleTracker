@@ -16,6 +16,10 @@ namespace VehicleTracker.Service
         {
         }
 
+        
+
+
+
         //TODO: Bölge kayıtlarına özel metotlar?
     }
 }
