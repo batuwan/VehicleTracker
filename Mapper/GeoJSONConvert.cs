@@ -39,6 +39,7 @@ namespace VehicleTracker.Mapper
             {
                 geometry = serializer.Deserialize<Geometry>(jsonReader);
             }
+            geometry.SRID = 4326;
             return geometry;
 
         }

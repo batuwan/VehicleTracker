@@ -53,11 +53,11 @@ namespace VehicleTracker.Controllers
         public async Task<IActionResult> Save(VehicleMoveDTO vehicleMoveDTO)
         {
             var _vehicleMove = _mapper.Map<VehicleMove>(vehicleMoveDTO);
-            _vehicleMove.Geom = GeoJSONConvert.geoJSONToGeometry(vehicleMoveDTO.Geom_);
+            _vehicleMove.Geom = GeoJSONConvert.FeatureToGeometry(vehicleMoveDTO.Geom_);
             //_vehicleMove.Geom = GeoJSONConvert.FeatureToGeometry(vehicleMoveDTO.Geom_);
             var newVehicleMove = await _vehicleMoveService.AddAsync(_vehicleMove);
 
-            return Created(string.Empty, newVehicleMove);
+            return Created(string.Empty, vehicleMoveDTO);
         }
 
         [HttpPut]
