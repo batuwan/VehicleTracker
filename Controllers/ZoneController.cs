@@ -9,6 +9,7 @@ using VehicleTracker.Core.Model;
 using VehicleTracker.Core.Service;
 using VehicleTracker.Core.UnitOfWork;
 using VehicleTracker.DTOs;
+using VehicleTracker.Mapper;
 
 namespace VehicleTracker.Controllers
 {
@@ -46,9 +47,12 @@ namespace VehicleTracker.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(ZoneDTO zoneDTO)
         {
-            var newZone = await _zoneService.AddAsync(_mapper.Map<Zone>(zoneDTO));
+            var _zone = _mapper.Map<Zone>(zoneDTO);
+            _zone.Geom = GeoJSONConvert.FeatureToGeometry(zoneDTO.Geom_);
+            //_vehicleMove.Geom = GeoJSONConvert.FeatureToGeometry(vehicleMoveDTO.Geom_);
+            var newVehicleMove = await _zoneService.AddAsync(_zone);
 
-            return Created(string.Empty, _mapper.Map<ZoneDTO>(newZone));
+            return Created(string.Empty, zoneDTO);
         }
 
 
