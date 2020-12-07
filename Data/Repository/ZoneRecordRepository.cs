@@ -17,15 +17,15 @@ namespace VehicleTracker.Data.Repository
 
         }
 
-        public async Task<Vehicle> GetWithRecordsByIdAsync(int vehicleID)
-        {
-            return await _appDbContext.Vehicles.Include(x => x.ZoneRecords).SingleOrDefaultAsync(x => x.Id == vehicleID);
-
-        }
 
         public async Task<ZoneRecord> GetLastRecordOfAVehicleByDate(int vehicleID)
         {
-            return await _appDbContext.ZoneRecords.OrderByDescending(r => r.Date_).SingleOrDefaultAsync();
+            return await _appDbContext.ZoneRecords.Where(r => r.VehicleId == vehicleID).OrderByDescending(r => r.Date_).SingleOrDefaultAsync();
+        }
+
+        public bool IsVehicleExistInZoneRecorsTable(int vehicleID)
+        {
+            return !(_appDbContext.ZoneRecords.Where(r => r.VehicleId == vehicleID).SingleOrDefaultAsync() == null);
         }
     }
 }

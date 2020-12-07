@@ -8,7 +8,7 @@ namespace VehicleTracker.DTOs
     public class VehicleMoveDTO
     {
         
-
+        public int Id { get; set; }
         public string Geom_ { get; set; }
         public DateTime Date_ { get; set; }
 

@@ -15,10 +15,11 @@ namespace VehicleTracker.Service
 {
     public class ZoneRecordService : Service<ZoneRecord>, IZoneRecordService
     {
-        private readonly ZoneRecordRepository _repository;
-        private readonly VehicleMoveService vehicleMoveService;
-        private readonly ZoneService zoneService;
-        public ZoneRecordService(IUnitOfWork unitOfWork, ZoneRecordRepository repository, VehicleMoveService vehicleMoveService, ZoneService zoneService) : base(unitOfWork, repository)
+        private readonly IZoneRecordRepository _repository;
+        private readonly IVehicleMoveService vehicleMoveService;
+        private readonly IZoneService zoneService;
+        //private readonly IZoneRepository zoneRepository;
+        public ZoneRecordService(IUnitOfWork unitOfWork, IZoneRecordRepository repository, IZoneService zoneService, IVehicleMoveService vehicleMoveService) : base(unitOfWork, repository)
         {
             _repository = repository;
             this.vehicleMoveService = vehicleMoveService;
@@ -28,7 +29,7 @@ namespace VehicleTracker.Service
         public async Task<ZoneRecord> SaveRecordAsync(int vehicleMoveId, int zoneId)
         {
             //Hareket kayıtlı mı?
-            if (!(_repository.IsExist(vehicleMoveId)))
+            if (!(_repository.IsVehicleExistInZoneRecorsTable(vehicleMoveId)))
             {
                 return null;
             }
@@ -41,20 +42,11 @@ namespace VehicleTracker.Service
             //Araç ID'sini al, Tarihe göre son kayıdı getir.
             ZoneRecord lastRecord = await _repository.GetLastRecordOfAVehicleByDate(vehicleMove.VehicleId);
 
-
-            //Tarih kontrolü
-            if (! (IsInputDateBiggerThanLastRecordsDate(vehicleMove.Date_, lastRecord.Date_)))
-            {
-                return null;
-            }
-
             ZoneRecord newZoneRecord = new ZoneRecord();
-            //İçerideyse
-            if (intersection)
-            {
 
-                //Son kayıt çıkışsa giriş olarak kaydet.
-                if (lastRecord.RecordType == false)
+            if (!(_repository.IsVehicleExistInZoneRecorsTable(vehicleMoveId)))
+            {
+                if (intersection)
                 {
                     newZoneRecord.ZoneId = zoneId;
                     newZoneRecord.VehicleMoveId = vehicleMoveId;
@@ -63,25 +55,55 @@ namespace VehicleTracker.Service
                     newZoneRecord.RecordType = true;
                     return await AddAsync(newZoneRecord);
                 }
-
-            }
-
-            //Dışarıdaysa
-            if (!intersection)
-            {
-
-                //Son kayıt girişse çıkış olarak kaydet.
-                if (lastRecord.RecordType == true)
+                else
                 {
-                    newZoneRecord.ZoneId = zoneId;
-                    newZoneRecord.VehicleMoveId = vehicleMoveId;
-                    newZoneRecord.Date_ = vehicleMove.Date_;
-                    newZoneRecord.VehicleId = vehicleMove.VehicleId;
-                    newZoneRecord.RecordType = false;
-                    return await AddAsync(newZoneRecord);
+                    return null;
+                }
+            }
+            else
+            {
+                //Tarih kontrolü
+                /*if (!(IsInputDateBiggerThanLastRecordsDate(vehicleMove.Date_, lastRecord.Date_)))
+                {
+                    return null;
+                }*/
+
+
+                //İçerideyse
+                if (intersection)
+                {
+
+                    //Son kayıt çıkışsa giriş olarak kaydet.
+                    if (lastRecord.RecordType == false)
+                    {
+                        newZoneRecord.ZoneId = zoneId;
+                        newZoneRecord.VehicleMoveId = vehicleMoveId;
+                        newZoneRecord.Date_ = vehicleMove.Date_;
+                        newZoneRecord.VehicleId = vehicleMove.VehicleId;
+                        newZoneRecord.RecordType = true;
+                        return await AddAsync(newZoneRecord);
+                    }
+
                 }
 
+                //Dışarıdaysa
+                if (!intersection)
+                {
+
+                    //Son kayıt girişse çıkış olarak kaydet.
+                    if (!(lastRecord == null) && lastRecord.RecordType == true)
+                    {
+                        newZoneRecord.ZoneId = zoneId;
+                        newZoneRecord.VehicleMoveId = vehicleMoveId;
+                        newZoneRecord.Date_ = vehicleMove.Date_;
+                        newZoneRecord.VehicleId = vehicleMove.VehicleId;
+                        newZoneRecord.RecordType = false;
+                        return await AddAsync(newZoneRecord);
+                    }
+
+                }
             }
+
 
             return null;
 

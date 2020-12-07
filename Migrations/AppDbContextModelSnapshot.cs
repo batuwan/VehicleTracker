@@ -46,7 +46,7 @@ namespace VehicleTracker.Migrations
                     b.Property<DateTime>("Date_")
                         .HasColumnType("datetime2");
 
-                    b.Property<Point>("Geom")
+                    b.Property<Geometry>("Geom")
                         .IsRequired()
                         .HasColumnType("geography");
 
@@ -70,7 +70,7 @@ namespace VehicleTracker.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<Polygon>("Geom")
+                    b.Property<Geometry>("Geom")
                         .IsRequired()
                         .HasColumnType("geography");
 

@@ -45,7 +45,7 @@ namespace VehicleTracker.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(int vehicleMoveId, int zoneId)
         {
-            var newZoneRecord = _zoneRecordService.SaveRecordAsync(vehicleMoveId, zoneId);
+            ZoneRecord newZoneRecord = await _zoneRecordService.SaveRecordAsync(vehicleMoveId, zoneId);
             ZoneRecordDTO zoneRecordDTO =_mapper.Map<ZoneRecordDTO>(newZoneRecord);
 
             return Created(string.Empty, zoneRecordDTO);

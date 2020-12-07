@@ -4,7 +4,7 @@ using NetTopologySuite.Geometries;
 
 namespace VehicleTracker.Migrations
 {
-    public partial class init : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,7 +28,7 @@ namespace VehicleTracker.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Geom = table.Column<Polygon>(type: "geography", nullable: false)
+                    Geom = table.Column<Geometry>(type: "geography", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -41,7 +41,7 @@ namespace VehicleTracker.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Geom = table.Column<Point>(type: "geography", nullable: false),
+                    Geom = table.Column<Geometry>(type: "geography", nullable: false),
                     Date_ = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Velocity = table.Column<int>(type: "int", nullable: false),
                     VehicleId = table.Column<int>(type: "int", nullable: false)

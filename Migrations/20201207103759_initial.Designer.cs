@@ -11,8 +11,8 @@ using VehicleTracker.Data;
 namespace VehicleTracker.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20201202132036_init")]
-    partial class init
+    [Migration("20201207103759_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,7 +48,7 @@ namespace VehicleTracker.Migrations
                     b.Property<DateTime>("Date_")
                         .HasColumnType("datetime2");
 
-                    b.Property<Point>("Geom")
+                    b.Property<Geometry>("Geom")
                         .IsRequired()
                         .HasColumnType("geography");
 
@@ -72,7 +72,7 @@ namespace VehicleTracker.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<Polygon>("Geom")
+                    b.Property<Geometry>("Geom")
                         .IsRequired()
                         .HasColumnType("geography");
 

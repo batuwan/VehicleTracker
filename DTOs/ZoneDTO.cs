@@ -7,7 +7,7 @@ namespace VehicleTracker.DTOs
 {
     public class ZoneDTO
     {
-
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Geom_ { get; set; }
     }

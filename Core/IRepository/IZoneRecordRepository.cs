@@ -11,5 +11,7 @@ namespace VehicleTracker.Core.IRepository
         //TODO:
 
         Task<ZoneRecord> GetLastRecordOfAVehicleByDate(int vehicleID);
+
+        bool IsVehicleExistInZoneRecorsTable(int vehicleID);
     }
 }
