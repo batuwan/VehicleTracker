@@ -9,7 +9,10 @@ namespace VehicleTracker.Service
     public class Intersection
     {
        /*
-        
+        1- Hareket kayıtlı mı?
+        2- Bölgenin içinde mi dışında mı?
+        3- Eğer içeride ise; Son kayıt çıkış ise, giriş kaydet. Aksi takdirde yoksay.
+        4- Eğer dışarıda ise; son kayıt giriş ise, çıkış kaydet. Aksi takdirde yoksay.
         
         
         */

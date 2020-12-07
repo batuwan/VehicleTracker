@@ -67,5 +67,10 @@ namespace VehicleTracker.Data.Repository
         {
             return await _dbSet.Where(predicate).ToListAsync();
         }
+
+        public bool IsExist(int id)
+        {
+            return !(_dbSet.FindAsync(id) == null);
+        }
     }
 }

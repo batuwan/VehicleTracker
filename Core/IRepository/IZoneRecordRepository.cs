@@ -9,5 +9,7 @@ namespace VehicleTracker.Core.IRepository
     public interface IZoneRecordRepository : IRepository<ZoneRecord>
     {
         //TODO:
+
+        Task<ZoneRecord> GetLastRecordOfAVehicleByDate(int vehicleID);
     }
 }
