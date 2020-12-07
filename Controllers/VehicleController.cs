@@ -79,7 +79,6 @@ namespace VehicleTracker.Controllers
         {
             var vehicle = _vehicleService.GetByIdAsync(id).Result;
             _vehicleService.Remove(vehicle);
-            _unitOfWork.Commit();
 
             return NoContent();
         }

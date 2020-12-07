@@ -71,7 +71,6 @@ namespace VehicleTracker.Controllers
         {
             var zone = _zoneService.GetByIdAsync(id).Result;
             _zoneService.Remove(zone);
-            _unitOfWork.Commit();
 
             return NoContent();
         }
