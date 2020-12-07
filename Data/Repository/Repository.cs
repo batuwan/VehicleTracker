@@ -72,5 +72,16 @@ namespace VehicleTracker.Data.Repository
         {
             return !(_dbSet.FindAsync(id) == null);
         }
+
+        public TEntity Add(TEntity entity)
+        {
+            _dbSet.Add(entity);
+            return entity;
+        }
+
+        public TEntity GetById(int id)
+        {
+            return _dbSet.Find(id);
+        }
     }
 }

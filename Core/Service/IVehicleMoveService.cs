@@ -9,5 +9,6 @@ namespace VehicleTracker.Core.Service
     public interface IVehicleMoveService : IService<VehicleMove>
     {
         //TODO: 
+       
     }
 }

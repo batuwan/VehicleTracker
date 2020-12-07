@@ -18,23 +18,27 @@ namespace VehicleTracker.Service
         private readonly IZoneRecordRepository _repository;
         private readonly IVehicleMoveService vehicleMoveService;
         private readonly IZoneService zoneService;
+        IUnitOfWork unitOfWork;
         //private readonly IZoneRepository zoneRepository;
         public ZoneRecordService(IUnitOfWork unitOfWork, IZoneRecordRepository repository, IZoneService zoneService, IVehicleMoveService vehicleMoveService) : base(unitOfWork, repository)
         {
             _repository = repository;
             this.vehicleMoveService = vehicleMoveService;
             this.zoneService = zoneService;
+            this.unitOfWork = unitOfWork;
         }
 
         public async Task<ZoneRecord> SaveRecordAsync(int vehicleMoveId, int zoneId)
         {
+            VehicleMove vehicleMove = await unitOfWork.VehicleMoves.GetByIdAsync(vehicleMoveId);
+            Zone zone = await unitOfWork.Zones.GetByIdAsync(zoneId);
+
             //Hareket kayıtlı mı?
-            if (!(_repository.IsVehicleExistInZoneRecorsTable(vehicleMoveId)))
+           /*f (!(_repository.IsVehicleExistInZoneRecordsTable(vehicleMove.VehicleId)))
             {
                 return null;
-            }
-            VehicleMove vehicleMove = await vehicleMoveService.GetByIdAsync(vehicleMoveId);
-            Zone zone = await zoneService.GetByIdAsync(zoneId);
+            }*/
+
 
             //Bölgenin içinde mi dışında mı?
             var intersection = IsIntersects(vehicleMove.Geom, zone.Geom);
@@ -44,9 +48,11 @@ namespace VehicleTracker.Service
 
             ZoneRecord newZoneRecord = new ZoneRecord();
 
-            if (!(_repository.IsVehicleExistInZoneRecorsTable(vehicleMoveId)))
+
+            //Araç daha önce tabloya kaydedilmemişse.
+            if (!(_repository.IsVehicleExistInZoneRecordsTable(vehicleMove.VehicleId)))
             {
-                if (intersection)
+                if (intersection == true)
                 {
                     newZoneRecord.ZoneId = zoneId;
                     newZoneRecord.VehicleMoveId = vehicleMoveId;
@@ -60,6 +66,8 @@ namespace VehicleTracker.Service
                     return null;
                 }
             }
+
+            //Araç kaydı varsa.
             else
             {
                 //Tarih kontrolü
@@ -70,11 +78,11 @@ namespace VehicleTracker.Service
 
 
                 //İçerideyse
-                if (intersection)
+                if (intersection == true)
                 {
 
                     //Son kayıt çıkışsa giriş olarak kaydet.
-                    if (lastRecord.RecordType == false)
+                    if (lastRecord != null && lastRecord.RecordType == false)
                     {
                         newZoneRecord.ZoneId = zoneId;
                         newZoneRecord.VehicleMoveId = vehicleMoveId;
@@ -83,7 +91,10 @@ namespace VehicleTracker.Service
                         newZoneRecord.RecordType = true;
                         return await AddAsync(newZoneRecord);
                     }
-
+                    else if (lastRecord != null && lastRecord.RecordType == true)
+                    {
+                        return null;
+                    }
                 }
 
                 //Dışarıdaysa

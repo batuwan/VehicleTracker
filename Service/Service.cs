@@ -81,5 +81,15 @@ namespace VehicleTracker.Service
 
             return updateEntity;
         }
+
+        public TEntity Add(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TEntity GetById(int id)
+        {
+            return _repository.GetById(id);
+        }
     }
 }

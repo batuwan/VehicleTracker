@@ -48,7 +48,6 @@ namespace VehicleTracker
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddTransient<AppDbContext>();
 
 
 

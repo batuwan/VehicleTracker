@@ -20,5 +20,8 @@ namespace VehicleTracker.Core.Service
 
         TEntity Update(TEntity entity);
 
+        TEntity Add(TEntity entity);
+
+        TEntity GetById(int id);
     }
 }

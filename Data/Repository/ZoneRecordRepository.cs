@@ -23,9 +23,9 @@ namespace VehicleTracker.Data.Repository
             return await _appDbContext.ZoneRecords.Where(r => r.VehicleId == vehicleID).OrderByDescending(r => r.Date_).SingleOrDefaultAsync();
         }
 
-        public bool IsVehicleExistInZoneRecorsTable(int vehicleID)
+        public bool IsVehicleExistInZoneRecordsTable(int vehicleID)
         {
-            return !(_appDbContext.ZoneRecords.Where(r => r.VehicleId == vehicleID).SingleOrDefaultAsync() == null);
+            return !(_appDbContext.ZoneRecords.Where(r => r.VehicleId == vehicleID).SingleOrDefault() == null);
         }
     }
 }

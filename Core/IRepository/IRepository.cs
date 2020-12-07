@@ -19,5 +19,9 @@ namespace VehicleTracker.Core.IRepository
         TEntity Update(TEntity entity);
         bool IsExist(int id);
 
+        TEntity Add(TEntity entity);
+
+        TEntity GetById(int id);
+
     }
 }
