@@ -43,12 +43,12 @@ namespace VehicleTracker.Controllers
             return Ok(_mapper.Map<ZoneRecordDTO>(zoneRecord));
         }
         [HttpPost]
-        public async Task<IActionResult> Save(int vehicleMoveId, int ZoneId)
+        public async Task<IActionResult> Save(int vehicleMoveId, int zoneId)
         {
-            //TODO: Buraya şartlara göre atama yapılmalı. 
-            //var newZoneRecord = await _zoneRecordService.AddAsync(_mapper.Map<ZoneRecord>(zoneRecordDTO));
+            var newZoneRecord = _zoneRecordService.SaveRecordAsync(vehicleMoveId, zoneId);
+            ZoneRecordDTO zoneRecordDTO =_mapper.Map<ZoneRecordDTO>(newZoneRecord);
 
-            return Created(string.Empty, null);
+            return Created(string.Empty, zoneRecordDTO);
         }
 
         [HttpPut]
