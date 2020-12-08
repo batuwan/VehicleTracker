@@ -20,9 +20,7 @@ namespace VehicleTracker.Data
         public DbSet<ZoneRecord> ZoneRecords { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {   //TODO: 
-            //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-
+        {
             modelBuilder.Entity<Vehicle>().HasMany(m => m.VehicleMoves).WithOne(v => v.Vehicle).OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<Vehicle>().HasMany(r => r.ZoneRecords).WithOne(v => v.Vehicle).OnDelete(DeleteBehavior.NoAction);
 

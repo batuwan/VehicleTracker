@@ -19,7 +19,7 @@ namespace VehicleTracker.Service
         private readonly IVehicleMoveService vehicleMoveService;
         private readonly IZoneService zoneService;
         IUnitOfWork unitOfWork;
-        //private readonly IZoneRepository zoneRepository;
+        
         public ZoneRecordService(IUnitOfWork unitOfWork, IZoneRecordRepository repository, IZoneService zoneService, IVehicleMoveService vehicleMoveService) : base(unitOfWork, repository)
         {
             _repository = repository;

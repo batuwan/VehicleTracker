@@ -15,7 +15,6 @@ namespace VehicleTracker.Data.Configuration
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).UseIdentityColumn();
 
-            //TODO
             builder.Property(x => x.Geom).IsRequired();
             builder.Property(x => x.VehicleId).IsRequired();
             builder.Property(x => x.Date_).IsRequired(); 

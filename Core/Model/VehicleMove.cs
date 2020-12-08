@@ -11,8 +11,6 @@ namespace VehicleTracker.Core.Model
         public int Id { get; set; }
         public Geometry Geom { get; set; }
 
-        
-
         public DateTime Date_ { get; set; }
 
         public int Velocity { get; set; }

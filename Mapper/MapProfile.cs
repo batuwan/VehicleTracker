@@ -28,8 +28,7 @@ namespace VehicleTracker.Mapper
             CreateMap<Vehicle, VehicleWithRecordsDTO>();
             CreateMap<Vehicle, VehicleWithMovementsDTO>();
 
-            CreateMap<VehicleMoveDTO, MyPoint>();
-            CreateMap<MyPoint, VehicleMoveDTO>();
+            
 
 
         }

@@ -73,7 +73,7 @@ namespace VehicleTracker.Service
             return await _repository.Where(predicate);
         }
 
-        public TEntity Update(TEntity entity)
+        public TEntity Update(TEntity entity)   
         {
             TEntity updateEntity = _repository.Update(entity);
 
