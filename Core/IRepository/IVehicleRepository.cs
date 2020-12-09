@@ -10,7 +10,7 @@ namespace VehicleTracker.Core.IRepository
 
     {
         Task<Vehicle> GetWithRecordsByIdAsync(int vehicleID, DateTime startDate, DateTime endDate);
-        Task<Vehicle> GetWithMovementsByIdAsync(int vehicleID);
+        Task<Vehicle> GetWithMovementsByIdAsync(int vehicleID, DateTime startDate, DateTime endDate);
         
     }
 }

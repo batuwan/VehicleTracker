@@ -17,15 +17,16 @@ namespace VehicleTracker.Data.Repository
         }
 
         public async Task<Vehicle> GetWithRecordsByIdAsync(int vehicleID, DateTime startDate, DateTime endDate)
-        {   var vehicles = await _appDbContext.Vehicles.Include(x => x.ZoneRecords.Where(y => (y.Date_ > startDate) && (y.Date_ < endDate))).SingleOrDefaultAsync(x => x.Id == vehicleID);
+        {   var vehicles = await _appDbContext.Vehicles.Include(x => x.ZoneRecords.Where(y => (y.Date_ >= startDate) && (y.Date_ <= endDate))).SingleOrDefaultAsync(x => x.Id == vehicleID);
             
             return vehicles;
 
         }
 
-        public async Task<Vehicle> GetWithMovementsByIdAsync(int vehicleID)
+        public async Task<Vehicle> GetWithMovementsByIdAsync(int vehicleID, DateTime startDate, DateTime endDate)
         {
-            return await _appDbContext.Vehicles.Include(x => x.VehicleMoves).SingleOrDefaultAsync(x => x.Id == vehicleID);
+            var vehicles = await _appDbContext.Vehicles.Include(x => x.VehicleMoves.Where(y => (y.Date_ >= startDate) && (y.Date_ <= endDate))).SingleOrDefaultAsync(x => x.Id == vehicleID);
+            return vehicles;
         }   
     }
 }

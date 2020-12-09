@@ -18,9 +18,9 @@ namespace VehicleTracker.Service
 
         }
 
-        public async Task<Vehicle> GetWithMovementsByIdAsync(int vehicleId)
+        public async Task<Vehicle> GetWithMovementsByIdAsync(int vehicleId, DateTime startDate, DateTime endDate)
         {
-            return await _unitOfWork.Vehicles.GetWithMovementsByIdAsync(vehicleId);
+            return await _unitOfWork.Vehicles.GetWithMovementsByIdAsync(vehicleId, startDate, endDate);
         }
 
         public async Task<Vehicle> GetWithRecordsByIdAsync(int vehicleId, DateTime start, DateTime end)

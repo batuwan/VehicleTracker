@@ -42,9 +42,9 @@ namespace VehicleTracker.Controllers
         }
 
         [HttpGet("{id}/movements")]
-        public async Task<IActionResult> GetWithMovementsById(int id)
+        public async Task<IActionResult> GetWithMovementsById(int id, DateTime startDate, DateTime endDate)
         {
-            var vehicle = await _vehicleService.GetWithMovementsByIdAsync(id);
+            var vehicle = await _vehicleService.GetWithMovementsByIdAsync(id, startDate, endDate);
 
             return Ok(_mapper.Map<VehicleWithMovementsDTO>(vehicle));
         }
