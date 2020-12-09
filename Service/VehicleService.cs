@@ -23,9 +23,10 @@ namespace VehicleTracker.Service
             return await _unitOfWork.Vehicles.GetWithMovementsByIdAsync(vehicleId);
         }
 
-        public async Task<Vehicle> GetWithRecordsByIdAsync(int vehicleId)
+        public async Task<Vehicle> GetWithRecordsByIdAsync(int vehicleId, DateTime start, DateTime end)
         {
-            return await _unitOfWork.Vehicles.GetWithRecordsByIdAsync(vehicleId);
+
+            return await _unitOfWork.Vehicles.GetWithRecordsByIdAsync(vehicleId, start, end);
         }
 
         //TODO: Araca özel metotlar?
